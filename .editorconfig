@@ -161,6 +161,19 @@ csharp_space_between_square_brackets = false
 # Wrapping preferences
 csharp_preserve_single_line_blocks = true
 csharp_preserve_single_line_statements = true
+csharp_style_namespace_declarations = block_scoped:warning
+csharp_style_prefer_method_group_conversion = true:warning
+csharp_style_prefer_top_level_statements = true:warning
+csharp_style_prefer_null_check_over_type_check = true:warning
+csharp_style_prefer_utf8_string_literals = true:warning
+csharp_style_prefer_tuple_swap = true:warning
+csharp_style_implicit_object_creation_when_type_is_apparent = true:warning
+csharp_style_prefer_local_over_anonymous_function = false:warning
+csharp_style_allow_blank_line_after_colon_in_constructor_initializer_experimental = true:warning
+csharp_style_allow_blank_lines_between_consecutive_braces_experimental = true:warning
+csharp_style_allow_embedded_statements_on_same_line_experimental = true:warning
+csharp_style_prefer_readonly_struct = true:warning
+csharp_style_prefer_extended_property_pattern = true:warning
 
 #### Naming styles ####
 [*.{cs,vb}]
@@ -229,7 +242,7 @@ dotnet_naming_rule.public_static_readonly_fields_should_be_pascalcase.style = pa
 
 dotnet_naming_rule.private_static_readonly_fields_should_be_pascalcase.severity = warning
 dotnet_naming_rule.private_static_readonly_fields_should_be_pascalcase.symbols = private_static_readonly_fields
-dotnet_naming_rule.private_static_readonly_fields_should_be_pascalcase.style = pascalcase
+dotnet_naming_rule.private_static_readonly_fields_should_be_pascalcase.style = s_camelcase
 
 dotnet_naming_rule.enums_should_be_pascalcase.severity = warning
 dotnet_naming_rule.enums_should_be_pascalcase.symbols = enums
@@ -355,6 +368,9 @@ dotnet_naming_style.s_camelcase.capitalization = camel_case
 
 # Other
 dotnet_diagnostic.CA1822.severity = warning
+dotnet_style_namespace_match_folder = true:warning
+dotnet_style_allow_statement_immediately_after_block_experimental = true:warning
+dotnet_style_allow_multiple_blank_lines_experimental = true:warning
 
 [*.Tests.cs]
 csharp_style_unused_value_expression_statement_preference = none
