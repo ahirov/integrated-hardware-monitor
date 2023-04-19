@@ -3,66 +3,42 @@ using System.ComponentModel;
 using System.Windows;
 
 using IntegratedHardwareMonitor.Bar.Entities;
+using IntegratedHardwareMonitor.Bar.IoC;
 using IntegratedHardwareMonitor.Bar.NativeCode;
 using IntegratedHardwareMonitor.Bar.Services;
-
-using Ninject;
+using IntegratedHardwareMonitor.Common.Entities;
 
 namespace IntegratedHardwareMonitor.Bar.Controls
 {
     public class BarWindow : Window
     {
         private static readonly Type s_windowType = typeof(BarWindow);
-        private static readonly DependencyProperty s_monitor =
-            DependencyProperty.Register(nameof(Monitor), typeof(MonitorInfo), s_windowType,
-                new FrameworkPropertyMetadata(null, OnPositionChanged));
+        private readonly IBarWindowDependencies _dependencies;
 
-        private static readonly DependencyProperty s_position =
-            DependencyProperty.Register(nameof(Position), typeof(BAR_POSITION), s_windowType,
-                new FrameworkPropertyMetadata(BAR_POSITION.TOP, OnPositionChanged));
-
-        private static readonly DependencyProperty s_thickness =
-            DependencyProperty.Register(nameof(Thickness), typeof(int), s_windowType,
-                new FrameworkPropertyMetadata(30, OnPositionChanged, OnThicknessAdjusted));
-
-        private bool _isBarRegistered;
         private int _messageId;
+        private DependencyProperty _display;
+        private DependencyProperty _position;
+        private DependencyProperty _thickness;
 
-        public BarWindow()
-        {
-            ShowInTaskbar = false;
-            WindowStyle = WindowStyle.None;
-            ResizeMode = ResizeMode.NoResize;
-            Topmost = true;
-        }
-
-        [Inject]
-        public IBarHandler BarHandler { get; set; }
-
-        [Inject]
-        public ISourceHandler SourceHandler { get; set; }
-
-        [Inject]
-        public IMessageHandler MessageHandler { get; set; }
-
+        public bool IsBarRegistered { get; set; }
         public bool IsBarResizing { get; set; }
 
-        public MonitorInfo Monitor
+        public DisplayInfo Display
         {
-            get => (MonitorInfo)GetValue(s_monitor);
-            set => SetValue(s_monitor, value);
+            get => (DisplayInfo)GetValue(_display);
+            set => SetValue(_display, value);
         }
 
-        public BAR_POSITION Position
+        public BarPosition Position
         {
-            get => (BAR_POSITION)GetValue(s_position);
-            set => SetValue(s_position, value);
+            get => (BarPosition)GetValue(_position);
+            set => SetValue(_position, value);
         }
 
         public int Thickness
         {
-            get => (int)GetValue(s_thickness);
-            set => SetValue(s_thickness, value);
+            get => (int)GetValue(_thickness);
+            set => SetValue(_thickness, value);
         }
 
         public int MessageId
@@ -77,54 +53,66 @@ namespace IntegratedHardwareMonitor.Bar.Controls
             }
         }
 
-        private static void OnPositionChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
+        public BarWindow(IBarWindowDependencies dependencies)
         {
-            BarWindow window = (BarWindow)obj;
-            if (window._isBarRegistered)
-            {
-                window.BarHandler.UpdateBar(window);
-            }
-        }
+            _dependencies = dependencies;
+            InitializeProperties();
 
-        private static object OnThicknessAdjusted(DependencyObject obj, object baseValue)
-        {
-            BarWindow window = (BarWindow)obj;
-            int value = (int)baseValue;
-            return window.Position switch
-            {
-                BAR_POSITION.LEFT or BAR_POSITION.RIGHT
-                => BarWindowHelper.LimitMinMax(value, window.MinWidth, window.MaxWidth),
-                BAR_POSITION.TOP or BAR_POSITION.BOTTOM
-                => BarWindowHelper.LimitMinMax(value, window.MinHeight, window.MaxHeight),
-                _ => throw new NotSupportedException(),
-            };
+            ShowInTaskbar = false;
+            WindowStyle = WindowStyle.None;
+            ResizeMode = ResizeMode.NoResize;
+            Topmost = true;
         }
 
         protected override void OnSourceInitialized(EventArgs args)
         {
             base.OnSourceInitialized(args);
 
-            SourceHandler.RegisterHook(this);
-            MessageHandler.SendMessage(this, AB_MSG.NEW);
+            _dependencies.SourceHandler.RegisterHook(this);
+            _dependencies.MessageHandler.SendMessage(this, AbMsg.NEW);
 
-            _isBarRegistered = true;
-            BarHandler.UpdateBar(this);
+            IsBarRegistered = true;
+            UpdateBar();
         }
 
         protected override void OnDpiChanged(DpiScale oldDpi, DpiScale newDpi)
         {
             base.OnDpiChanged(oldDpi, newDpi);
-            BarHandler.UpdateBar(this);
+            UpdateBar();
         }
 
         protected override void OnClosing(CancelEventArgs args)
         {
             base.OnClosing(args);
-            if (_isBarRegistered)
+            if (IsBarRegistered)
             {
-                MessageHandler.SendMessage(this, AB_MSG.REMOVE);
-                _isBarRegistered = false;
+                _dependencies.MessageHandler.SendMessage(this, AbMsg.REMOVE);
+                IsBarRegistered = false;
             }
+        }
+
+        public void UpdateBar()
+        {
+            _dependencies.BarHandler.UpdateBar(this);
+        }
+
+        private void InitializeProperties()
+        {
+            IBarEventsHandler handler = _dependencies.BarEventsHandler;
+            Setting setting = _dependencies.SettingProvider.Setting;
+
+            DisplayInfo display = _dependencies.DisplayProvider.GetDisplay(setting.DisplayId);
+            _display = DependencyProperty.Register(nameof(Display), typeof(DisplayInfo), s_windowType,
+                new FrameworkPropertyMetadata(display, handler.OnPositionChanged));
+
+            BarPosition position = _dependencies.Mapper.Map<BarPosition>(setting.Position);
+            _position = DependencyProperty.Register(nameof(Position), typeof(BarPosition), s_windowType,
+                new FrameworkPropertyMetadata(position, handler.OnPositionChanged));
+
+            int defaultThickness = 30;
+            _thickness = DependencyProperty.Register(nameof(Thickness), typeof(int), s_windowType,
+                new FrameworkPropertyMetadata(defaultThickness,
+                handler.OnPositionChanged, handler.OnThicknessAdjusted));
         }
     }
 }

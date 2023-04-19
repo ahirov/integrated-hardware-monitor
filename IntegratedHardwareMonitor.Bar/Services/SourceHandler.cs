@@ -44,17 +44,17 @@ namespace IntegratedHardwareMonitor.Bar.Services
                 }
                 else if (message == WM_ACTIVATE)
                 {
-                    _messageHandler.SendMessage(window, AB_MSG.ACTIVATE);
+                    _messageHandler.SendMessage(window, AbMsg.ACTIVATE);
                 }
                 else if (message == WM_WINDOWPOSCHANGED)
                 {
-                    _messageHandler.SendMessage(window, AB_MSG.WINDOWPOSCHANGED);
+                    _messageHandler.SendMessage(window, AbMsg.WINDOWPOSCHANGED);
                 }
                 else if (message == window.MessageId)
                 {
-                    switch ((AB_NOTIFY)(int)wParam)
+                    switch ((AbNotify)(int)wParam)
                     {
-                        case AB_NOTIFY.POSCHANGED:
+                        case AbNotify.POSCHANGED:
                             _barHandler.UpdateBar(window);
                             isHandled = true;
                             break;

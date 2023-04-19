@@ -1,6 +1,6 @@
 ﻿namespace IntegratedHardwareMonitor.Bar.Controls
 {
-    public enum BAR_POSITION
+    public enum BarPosition
     {
         LEFT,
         TOP,

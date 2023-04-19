@@ -3,6 +3,12 @@ using System.Windows;
 
 using FluentAssertions;
 
+using IntegratedHardwareMonitor.Bar.IoC;
+using IntegratedHardwareMonitor.Common.Entities;
+using IntegratedHardwareMonitor.View.Windows;
+
+using NSubstitute;
+
 namespace IntegratedHardwareMonitor.Tests
 {
     [Apartment(ApartmentState.STA)]
@@ -13,7 +19,9 @@ namespace IntegratedHardwareMonitor.Tests
         [SetUp]
         public void Setup()
         {
-            _window = new MainWindow();
+            IBarWindowDependencies dependencies = Substitute.For<IBarWindowDependencies>();
+            dependencies.SettingProvider.Setting.Returns(Setting.GetDefault());
+            _window = new MainWindow(null, dependencies);
         }
 
         [Test]

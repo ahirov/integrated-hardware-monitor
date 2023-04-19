@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <ItemDefinitionGroup>
+        <ProjectReference>
+            <PrivateAssets>all</PrivateAssets>
+        </ProjectReference>
+        <PackageReference>
+            <PrivateAssets>all</PrivateAssets>
+        </PackageReference>
+    </ItemDefinitionGroup>
+    <PropertyGroup>
+        <TargetFramework>net6.0-windows</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference
+            Include="Autofac"
+            Version="7.0.1"
+            />
+    </ItemGroup>
+</Project>

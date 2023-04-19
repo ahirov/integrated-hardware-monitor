@@ -11,19 +11,19 @@ namespace IntegratedHardwareMonitor.Bar.Services
 
     public interface IMessageHandler
     {
-        void SendMessage(BarWindow window, AB_MSG message);
-        void SendMessage(BarWindow window, AB_MSG message, AppBarDataAction action, out AppBarData data);
-        void SendMessage(AB_MSG message, ref AppBarData data);
+        void SendMessage(BarWindow window, AbMsg message);
+        void SendMessage(BarWindow window, AbMsg message, AppBarDataAction action, out AppBarData data);
+        void SendMessage(AbMsg message, ref AppBarData data);
     }
 
     public sealed class MessageHandler : IMessageHandler
     {
-        public void SendMessage(BarWindow window, AB_MSG message)
+        public void SendMessage(BarWindow window, AbMsg message)
         {
             SendMessage(window, message, null, out _);
         }
 
-        public void SendMessage(BarWindow window, AB_MSG message, AppBarDataAction action,
+        public void SendMessage(BarWindow window, AbMsg message, AppBarDataAction action,
             out AppBarData data)
         {
             data = GetAppBarData(window);
@@ -31,7 +31,7 @@ namespace IntegratedHardwareMonitor.Bar.Services
             SendMessage(message, ref data);
         }
 
-        public void SendMessage(AB_MSG message, ref AppBarData data)
+        public void SendMessage(AbMsg message, ref AppBarData data)
         {
             _ = Shell32.SHAppBarMessage(message, ref data);
         }
@@ -43,7 +43,7 @@ namespace IntegratedHardwareMonitor.Bar.Services
                 Size = Marshal.SizeOf(typeof(AppBarData)),
                 Handle = new WindowInteropHelper(window).Handle,
                 MessageId = window.MessageId,
-                Edge = (AB_EDGE)(int)window.Position
+                Edge = (AbEdge)(int)window.Position
             };
         }
     }

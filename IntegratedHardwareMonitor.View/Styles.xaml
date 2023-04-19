@@ -1,0 +1,19 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=System.Runtime"
+                    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml">
+    <ResourceDictionary.MergedDictionaries>
+        <ui:ControlsDictionary />
+    </ResourceDictionary.MergedDictionaries>
+
+    <!-- Variables.xaml -->
+    <system:Double x:Key="ControlContentThemeFontSize">12</system:Double>
+
+    <!-- Combobox.xaml -->
+    <Thickness x:Key="ComboBoxPadding">5,4,5,4</Thickness>
+    <Thickness x:Key="ComboBoxItemMargin">3,2,3,0</Thickness>
+    <Thickness x:Key="ComboBoxItemContentMargin">5,4,4,4</Thickness>
+
+    <!-- Light/Dark.xaml -->
+    <Color x:Key="ControlFillColorSecondary">#603f3f3f</Color>
+</ResourceDictionary>

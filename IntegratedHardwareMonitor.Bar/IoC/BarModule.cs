@@ -1,17 +1,23 @@
-﻿using IntegratedHardwareMonitor.Bar.Services;
+﻿using Autofac;
+using Autofac.Extras.AggregateService;
 
-using Ninject.Modules;
+using AutoMapper.Contrib.Autofac.DependencyInjection;
+
+using IntegratedHardwareMonitor.Bar.Services;
 
 namespace IntegratedHardwareMonitor.Bar.IoC
 {
-    public sealed class BarModule : NinjectModule
+    public sealed class BarModule : Module
     {
-        public override void Load()
+        protected override void Load(ContainerBuilder builder)
         {
-            _ = Bind<IMonitorProvider>().To<MonitorProvider>().InSingletonScope();
-            _ = Bind<IMessageHandler>().To<MessageHandler>().InSingletonScope();
-            _ = Bind<ISourceHandler>().To<SourceHandler>().InSingletonScope();
-            _ = Bind<IBarHandler>().To<BarHandler>().InSingletonScope();
+            _ = builder.RegisterAutoMapper(typeof(BarModule).Assembly);
+            builder.RegisterAggregateService<IBarWindowDependencies>();
+            _ = builder.RegisterType<DisplayProvider>().As<IDisplayProvider>().SingleInstance();
+            _ = builder.RegisterType<MessageHandler>().As<IMessageHandler>().SingleInstance();
+            _ = builder.RegisterType<SourceHandler>().As<ISourceHandler>().SingleInstance();
+            _ = builder.RegisterType<BarHandler>().As<IBarHandler>().SingleInstance();
+            _ = builder.RegisterType<BarEventsHandler>().As<IBarEventsHandler>().SingleInstance();
         }
     }
 }

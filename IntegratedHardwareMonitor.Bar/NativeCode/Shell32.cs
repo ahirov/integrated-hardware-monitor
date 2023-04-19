@@ -12,6 +12,6 @@ namespace IntegratedHardwareMonitor.Bar.NativeCode
         /// More details here: https://www.pinvoke.net/default.aspx/shell32/SHAppBarMessage.html
         /// </summary>
         [DllImport(DLL_NAME)]
-        public static extern uint SHAppBarMessage(AB_MSG message, ref AppBarData data);
+        public static extern uint SHAppBarMessage(AbMsg message, ref AppBarData data);
     }
 }

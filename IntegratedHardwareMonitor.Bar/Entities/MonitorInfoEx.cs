@@ -14,7 +14,7 @@ namespace IntegratedHardwareMonitor.Bar.Entities
         private int _size; // initialize this field using: Marshal.SizeOf(typeof(MonitorInfoEx));
         private Rectangle _monitor;
         private Rectangle _workArea;
-        private readonly MONITOR_INFO_F _flags;
+        private readonly MonitorInfoF _flags;
 
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = CCH_DEVICE_NAME)]
         private readonly string _deviceName;
@@ -23,7 +23,7 @@ namespace IntegratedHardwareMonitor.Bar.Entities
         public int Size { get => _size; set => _size = value; }
         public Rectangle Monitor => _monitor;
         public Rectangle WorkArea => _workArea;
-        public MONITOR_INFO_F Flags => _flags;
+        public MonitorInfoF Flags => _flags;
         public string DeviceName => _deviceName;
     }
 }

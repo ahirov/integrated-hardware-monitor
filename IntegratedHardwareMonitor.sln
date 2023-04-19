@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntegratedHardwareMonitor", "IntegratedHardwareMonitor\IntegratedHardwareMonitor.csproj", "{2077820C-2919-4839-B92C-8396C34EEB81}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntegratedHardwareMonitor.Tests", "IntegratedHardwareMonitor.Tests\IntegratedHardwareMonitor.Tests.csproj", "{2C6FFE96-A677-4D29-BC62-4BE7BD3EE463}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntegratedHardwareMonitor.Bar", "IntegratedHardwareMonitor.Bar\IntegratedHardwareMonitor.Bar.csproj", "{77999A4E-47CB-4D80-B454-3F000D3EDD40}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntegratedHardwareMonitor.View", "IntegratedHardwareMonitor.View\IntegratedHardwareMonitor.View.csproj", "{C807F406-710D-42AF-8169-FFDE2B3CDF57}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntegratedHardwareMonitor.Common", "IntegratedHardwareMonitor.Common\IntegratedHardwareMonitor.Common.csproj", "{9FE21137-A6AD-4443-9B23-9A50A5D3C46A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntegratedHardwareMonitor.View.Tests", "Tests\IntegratedHardwareMonitor.View.Tests\IntegratedHardwareMonitor.View.Tests.csproj", "{2B63362E-43A0-47A7-BE6B-78296AFD2731}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,18 +17,22 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{2077820C-2919-4839-B92C-8396C34EEB81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2077820C-2919-4839-B92C-8396C34EEB81}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2077820C-2919-4839-B92C-8396C34EEB81}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2077820C-2919-4839-B92C-8396C34EEB81}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2C6FFE96-A677-4D29-BC62-4BE7BD3EE463}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2C6FFE96-A677-4D29-BC62-4BE7BD3EE463}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2C6FFE96-A677-4D29-BC62-4BE7BD3EE463}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2C6FFE96-A677-4D29-BC62-4BE7BD3EE463}.Release|Any CPU.Build.0 = Release|Any CPU
 		{77999A4E-47CB-4D80-B454-3F000D3EDD40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{77999A4E-47CB-4D80-B454-3F000D3EDD40}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{77999A4E-47CB-4D80-B454-3F000D3EDD40}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{77999A4E-47CB-4D80-B454-3F000D3EDD40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C807F406-710D-42AF-8169-FFDE2B3CDF57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C807F406-710D-42AF-8169-FFDE2B3CDF57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C807F406-710D-42AF-8169-FFDE2B3CDF57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C807F406-710D-42AF-8169-FFDE2B3CDF57}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9FE21137-A6AD-4443-9B23-9A50A5D3C46A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FE21137-A6AD-4443-9B23-9A50A5D3C46A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FE21137-A6AD-4443-9B23-9A50A5D3C46A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FE21137-A6AD-4443-9B23-9A50A5D3C46A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B63362E-43A0-47A7-BE6B-78296AFD2731}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B63362E-43A0-47A7-BE6B-78296AFD2731}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B63362E-43A0-47A7-BE6B-78296AFD2731}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B63362E-43A0-47A7-BE6B-78296AFD2731}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

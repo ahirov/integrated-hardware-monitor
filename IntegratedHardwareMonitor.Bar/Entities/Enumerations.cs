@@ -5,7 +5,7 @@ namespace IntegratedHardwareMonitor.Bar.Entities
     /// <summary>
     /// More details here: https://www.pinvoke.net/default.aspx/shell32/SHAppBarMessage.html
     /// </summary>
-    public enum AB_EDGE
+    public enum AbEdge
     {
         LEFT,
         TOP,
@@ -16,7 +16,7 @@ namespace IntegratedHardwareMonitor.Bar.Entities
     /// <summary>
     /// More details here: https://www.pinvoke.net/default.aspx/shell32/SHAppBarMessage.html
     /// </summary>
-    public enum AB_MSG
+    public enum AbMsg
     {
         NEW,
         REMOVE,
@@ -34,7 +34,7 @@ namespace IntegratedHardwareMonitor.Bar.Entities
     /// <summary>
     /// More details here: https://www.pinvoke.net/default.aspx/shell32/SHAppBarMessage.html
     /// </summary>
-    public enum AB_NOTIFY
+    public enum AbNotify
     {
         STATECHANGE,
         POSCHANGED,
@@ -46,7 +46,7 @@ namespace IntegratedHardwareMonitor.Bar.Entities
     /// More details here: https://www.pinvoke.net/default.aspx/user32/MONITORINFOEX.html
     /// </summary>
     [Flags]
-    public enum MONITOR_INFO_F
+    public enum MonitorInfoF
     {
         PRIMARY = 1
     }

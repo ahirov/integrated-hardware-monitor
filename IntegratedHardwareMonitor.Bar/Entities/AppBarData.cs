@@ -12,7 +12,7 @@ namespace IntegratedHardwareMonitor.Bar.Entities
         public int Size { get; set; } // initialize this field using: Marshal.SizeOf(typeof(AppBarData));
         public IntPtr Handle { get; set; }
         public int MessageId { get; set; }
-        public AB_EDGE Edge { get; set; }
+        public AbEdge Edge { get; set; }
         public Rectangle Rectangle { get; set; }
         public IntPtr Param { get; set; }
     }

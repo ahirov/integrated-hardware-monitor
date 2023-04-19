@@ -15,12 +15,12 @@ namespace IntegratedHardwareMonitor.Bar.Services
     public sealed class BarHandler : IBarHandler
     {
         private readonly IMessageHandler _messageHandler;
-        private readonly IMonitorProvider _monitorProvider;
+        private readonly IDisplayProvider _displayProvider;
 
-        public BarHandler(IMessageHandler messageHandler, IMonitorProvider monitorProvider)
+        public BarHandler(IMessageHandler messageHandler, IDisplayProvider displayProvider)
         {
             _messageHandler = messageHandler;
-            _monitorProvider = monitorProvider;
+            _displayProvider = displayProvider;
         }
 
         public void UpdateBar(BarWindow window)
@@ -30,12 +30,12 @@ namespace IntegratedHardwareMonitor.Bar.Services
                 return;
             }
 
-            AppBarDataAction action = (ref AppBarData d)
-                => d.Rectangle = (Rectangle)_monitorProvider.GetMonitor(window.Monitor).Viewport;
-            _messageHandler.SendMessage(window, AB_MSG.QUERYPOS, action, out AppBarData data);
+            AppBarDataAction action = (ref AppBarData data)
+                => data.Rectangle = (Rectangle)_displayProvider.GetDisplay(window.Display).Viewport;
+            _messageHandler.SendMessage(window, AbMsg.QUERYPOS, action, out AppBarData data);
 
             data.Rectangle = GetNewRectangle(data.Rectangle, window);
-            _messageHandler.SendMessage(AB_MSG.SETPOS, ref data);
+            _messageHandler.SendMessage(AbMsg.SETPOS, ref data);
 
             window.IsBarResizing = true;
             try
@@ -57,16 +57,16 @@ namespace IntegratedHardwareMonitor.Bar.Services
             int thickness = WpfDimensionToDesktop(window, window.Thickness);
             switch (window.Position)
             {
-                case BAR_POSITION.TOP:
+                case BarPosition.TOP:
                     rectangle.Bottom = rectangle.Top + thickness;
                     break;
-                case BAR_POSITION.BOTTOM:
+                case BarPosition.BOTTOM:
                     rectangle.Top = rectangle.Bottom - thickness;
                     break;
-                case BAR_POSITION.LEFT:
+                case BarPosition.LEFT:
                     rectangle.Right = rectangle.Left + thickness;
                     break;
-                case BAR_POSITION.RIGHT:
+                case BarPosition.RIGHT:
                     rectangle.Left = rectangle.Right - thickness;
                     break;
                 default: throw new NotSupportedException();
