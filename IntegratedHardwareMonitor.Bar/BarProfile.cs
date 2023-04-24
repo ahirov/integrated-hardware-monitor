@@ -2,7 +2,7 @@
 using AutoMapper.Extensions.EnumMapping;
 
 using IntegratedHardwareMonitor.Bar.Controls;
-using IntegratedHardwareMonitor.Core.Entities;
+using IntegratedHardwareMonitor.Core.Entities.Enumerations;
 
 namespace IntegratedHardwareMonitor.Bar
 {

@@ -99,7 +99,7 @@ namespace IntegratedHardwareMonitor.Bar.Controls
         private void InitializeProperties()
         {
             IBarEventsHandler handler = _dependencies.BarEventsHandler;
-            Setting setting = _dependencies.SettingProvider.Setting;
+            ApplicationSetting setting = _dependencies.SettingProvider.Setting;
 
             DisplayInfo display = _dependencies.DisplayProvider.GetDisplay(setting.DisplayId);
             _display = DependencyProperty.Register(nameof(Display), typeof(DisplayInfo), s_windowType,

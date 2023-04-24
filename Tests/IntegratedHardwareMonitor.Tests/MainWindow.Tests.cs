@@ -20,7 +20,7 @@ namespace IntegratedHardwareMonitor.Tests
         public void Setup()
         {
             IBarWindowDependencies dependencies = Substitute.For<IBarWindowDependencies>();
-            dependencies.SettingProvider.Setting.Returns(Setting.GetDefault());
+            dependencies.SettingProvider.Setting.Returns(new ApplicationSetting());
             _window = new MainWindow(null, dependencies);
         }
 

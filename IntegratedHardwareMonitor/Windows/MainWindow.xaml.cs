@@ -3,7 +3,7 @@ using System.Windows;
 
 using IntegratedHardwareMonitor.Bar.Controls;
 using IntegratedHardwareMonitor.Bar.IoC;
-using IntegratedHardwareMonitor.Core.Entities;
+using IntegratedHardwareMonitor.Core.Entities.Enumerations;
 using IntegratedHardwareMonitor.IoC;
 
 using Wpf.Ui.Appearance;

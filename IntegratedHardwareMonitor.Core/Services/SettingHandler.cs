@@ -1,19 +1,20 @@
 ﻿using IntegratedHardwareMonitor.Core.Entities;
+using IntegratedHardwareMonitor.Core.Entities.Enumerations;
 
 namespace IntegratedHardwareMonitor.Core.Services
 {
     public interface ISettingHandler
     {
-        Setting Setting { get; }
-        List<Item<Design>> GetThemes();
-        List<Item<Position>> GetPositions();
-        void Save(Setting setting);
+        ApplicationSetting Setting { get; }
+        List<EnumWrapper<Design>> GetThemes();
+        List<EnumWrapper<Position>> GetPositions();
+        void Save(ApplicationSetting setting);
     }
 
     public sealed class SettingHandler : ISettingHandler
     {
         private readonly ISettingStore _store;
-        public Setting Setting { get; }
+        public ApplicationSetting Setting { get; }
 
         public SettingHandler(ISettingStore store)
         {
@@ -21,23 +22,23 @@ namespace IntegratedHardwareMonitor.Core.Services
             Setting = _store.Load();
         }
 
-        public List<Item<Design>> GetThemes()
+        public List<EnumWrapper<Design>> GetThemes()
         {
             return Enum
                 .GetValues<Design>()
-                .Select(item => new Item<Design>(item))
+                .Select(item => new EnumWrapper<Design>(item))
                 .ToList();
         }
 
-        public List<Item<Position>> GetPositions()
+        public List<EnumWrapper<Position>> GetPositions()
         {
             return Enum
                 .GetValues<Position>()
-                .Select(item => new Item<Position>(item))
+                .Select(item => new EnumWrapper<Position>(item))
                 .ToList();
         }
 
-        public void Save(Setting setting)
+        public void Save(ApplicationSetting setting)
         {
             _store.Save(setting);
         }

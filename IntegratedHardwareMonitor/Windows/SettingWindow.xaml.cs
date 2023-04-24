@@ -8,6 +8,7 @@ using System.Windows.Media.Animation;
 using IntegratedHardwareMonitor.Bar.Controls;
 using IntegratedHardwareMonitor.Bar.Services;
 using IntegratedHardwareMonitor.Core.Entities;
+using IntegratedHardwareMonitor.Core.Entities.Enumerations;
 using IntegratedHardwareMonitor.Core.Services;
 using IntegratedHardwareMonitor.IoC;
 
@@ -114,7 +115,7 @@ namespace IntegratedHardwareMonitor.Windows
 
         private void OnClickSaveBtn(object sender, RoutedEventArgs args)
         {
-            _settingDependencies.SettingHandler.Save(new Setting()
+            _settingDependencies.SettingHandler.Save(new ApplicationSetting()
             {
                 Design = (Design)ThemeCmbBx.SelectedValue,
                 Position = (Position)PositionCmbBx.SelectedValue,
@@ -125,7 +126,7 @@ namespace IntegratedHardwareMonitor.Windows
 
         private void OnClickCancelBtn(object sender, RoutedEventArgs args)
         {
-            Setting setting = _settingDependencies.SettingHandler.Setting;
+            ApplicationSetting setting = _settingDependencies.SettingHandler.Setting;
             ThemeCmbBx.SelectedValue = setting.Design;
             PositionCmbBx.SelectedValue = setting.Position;
             DisplayCmbBx.SelectedValue = setting.DisplayId;

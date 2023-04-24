@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace IntegratedHardwareMonitor.Core.Entities
+namespace IntegratedHardwareMonitor.Core.Entities.Enumerations
 {
     public enum Position
     {

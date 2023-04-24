@@ -2,7 +2,7 @@
 
 using AutoMapper;
 
-using IntegratedHardwareMonitor.Core.Entities;
+using IntegratedHardwareMonitor.Core.Entities.Enumerations;
 
 using Wpf.Ui.Appearance;
 

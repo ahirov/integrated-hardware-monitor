@@ -6,21 +6,21 @@ namespace IntegratedHardwareMonitor.Core.Services
 {
     public interface ISettingStore
     {
-        Setting Load();
-        void Save(Setting setting);
+        ApplicationSetting Load();
+        void Save(ApplicationSetting setting);
     }
 
     public sealed class SettingStore : ISettingStore
     {
         private readonly string _filePath = "setting.json";
 
-        public Setting Load()
+        public ApplicationSetting Load()
         {
-            Setting result = Setting.GetDefault();
+            ApplicationSetting result = new();
             if (File.Exists(_filePath))
             {
                 string json = File.ReadAllText(_filePath);
-                Setting? setting = JsonSerializer.Deserialize<Setting>(json);
+                ApplicationSetting? setting = JsonSerializer.Deserialize<ApplicationSetting>(json);
                 if (setting != null)
                 {
                     result = setting;
@@ -29,7 +29,7 @@ namespace IntegratedHardwareMonitor.Core.Services
             return result;
         }
 
-        public void Save(Setting setting)
+        public void Save(ApplicationSetting setting)
         {
             string json = JsonSerializer.Serialize(setting);
             File.WriteAllText(_filePath, json);

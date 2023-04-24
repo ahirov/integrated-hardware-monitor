@@ -3,12 +3,12 @@ using System.Reflection;
 
 namespace IntegratedHardwareMonitor.Core.Entities
 {
-    public sealed class Item<T> where T : struct, IConvertible
+    public sealed class EnumWrapper<T> where T : struct, IConvertible
     {
         public T Value { get; }
         public string Name { get; } = string.Empty;
 
-        public Item(T value)
+        public EnumWrapper(T value)
         {
             Value = value;
 
