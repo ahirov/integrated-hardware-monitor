@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -27,10 +28,24 @@ namespace IntegratedHardwareMonitor.View.Windows
         private readonly MainWindow _barWindow;
         private bool _isClosed;
 
+        public ObservableCollection<HardwareComponent> SelectedItems { get; set; }
+        public ObservableCollection<HardwareComponent> TotalItems { get; set; }
+
         public SettingWindow(MainWindow barWindow, ISettingWindowDependencies settingDependencies)
         {
             _barWindow = barWindow;
             _settingDependencies = settingDependencies;
+
+            SelectedItems = new ObservableCollection<HardwareComponent>();
+            TotalItems = new ObservableCollection<HardwareComponent>();
+            for (int i = 0; i < 20; i++)
+            {
+                TotalItems.Add(new HardwareComponent()
+                {
+                    Position = i,
+                    Value = (i + 1).ToString()
+                });
+            }
             InitializeComponent();
         }
 
@@ -40,18 +55,23 @@ namespace IntegratedHardwareMonitor.View.Windows
             ISettingHandler settingHandler = _settingDependencies.SettingHandler;
             IDisplayProvider displayProvider = _settingDependencies.DisplayProvider;
 
-            Themes.ItemsSource = settingHandler.GetThemes();
-            Themes.SelectedValue = settingHandler.Setting.Design;
+            ThemeCmbBx.ItemsSource = settingHandler.GetThemes();
+            ThemeCmbBx.SelectedValue = settingHandler.Setting.Design;
 
-            Positions.ItemsSource = settingHandler.GetPositions();
-            Positions.SelectedValue = settingHandler.Setting.Position;
+            PositionCmbBx.ItemsSource = settingHandler.GetPositions();
+            PositionCmbBx.SelectedValue = settingHandler.Setting.Position;
 
-            Displays.ItemsSource = displayProvider.GetDisplays();
-            Displays.SelectedValue = displayProvider.GetDisplay(settingHandler.Setting.DisplayId).Id;
+            DisplayCmbBx.ItemsSource = displayProvider.GetDisplays();
+            DisplayCmbBx.SelectedValue = displayProvider.GetDisplay(settingHandler.Setting.DisplayId).Id;
 
             AnimationElement.Duration = AnimationDuration;
             AnimationElement.From = ZeroOpacity;
             AnimationElement.To = FullOpacity;
+            ComponentsLstSltr.DataContext = new
+            {
+                SelectedItems,
+                TotalItems
+            };
         }
 
         protected override void OnClosing(CancelEventArgs args)
@@ -74,41 +94,41 @@ namespace IntegratedHardwareMonitor.View.Windows
             }
         }
 
-        private void OnThemeChange(object sender, SelectionChangedEventArgs args)
+        private void OnChangeThemeCmbBx(object sender, SelectionChangedEventArgs args)
         {
-            Design design = (Design)Themes.SelectedValue;
+            Design design = (Design)ThemeCmbBx.SelectedValue;
             Theme.Apply(_settingDependencies.Mapper.Map<ThemeType>(design));
         }
 
-        private void OnPositionChange(object sender, SelectionChangedEventArgs args)
+        private void OnChangePositionCmbBx(object sender, SelectionChangedEventArgs args)
         {
-            Position position = (Position)Positions.SelectedValue;
+            Position position = (Position)PositionCmbBx.SelectedValue;
             _barWindow.Position = _settingDependencies.Mapper.Map<BarPosition>(position);
         }
 
-        private void OnDisplayChange(object sender, SelectionChangedEventArgs args)
+        private void OnChangeDisplayCmbBx(object sender, SelectionChangedEventArgs args)
         {
-            string id = (string)Displays.SelectedValue;
+            string id = (string)DisplayCmbBx.SelectedValue;
             _barWindow.Display = _settingDependencies.DisplayProvider.GetDisplay(id);
         }
 
-        private void OnSaveButtonClick(object sender, RoutedEventArgs args)
+        private void OnClickSaveBtn(object sender, RoutedEventArgs args)
         {
             _settingDependencies.SettingHandler.Save(new Setting()
             {
-                Design = (Design)Themes.SelectedValue,
-                Position = (Position)Positions.SelectedValue,
-                DisplayId = (string)Displays.SelectedValue
+                Design = (Design)ThemeCmbBx.SelectedValue,
+                Position = (Position)PositionCmbBx.SelectedValue,
+                DisplayId = (string)DisplayCmbBx.SelectedValue
             });
             Close();
         }
 
-        private void OnCancelButtonClick(object sender, RoutedEventArgs args)
+        private void OnClickCancelBtn(object sender, RoutedEventArgs args)
         {
             Setting setting = _settingDependencies.SettingHandler.Setting;
-            Themes.SelectedValue = setting.Design;
-            Positions.SelectedValue = setting.Position;
-            Displays.SelectedValue = setting.DisplayId;
+            ThemeCmbBx.SelectedValue = setting.Design;
+            PositionCmbBx.SelectedValue = setting.Position;
+            DisplayCmbBx.SelectedValue = setting.DisplayId;
             Close();
         }
     }

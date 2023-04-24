@@ -35,7 +35,7 @@ namespace IntegratedHardwareMonitor.View.Windows
             Theme.Apply(theme);
         }
 
-        private void OnSettingButtonClick(object sender, RoutedEventArgs args)
+        private void OnClickSettingBtn(object sender, RoutedEventArgs args)
         {
             if (_setting == null || !_setting.IsLoaded)
             {
@@ -44,7 +44,7 @@ namespace IntegratedHardwareMonitor.View.Windows
             }
         }
 
-        private void OnCloseButtonClick(object sender, RoutedEventArgs args)
+        private void OnClickCloseBtn(object sender, RoutedEventArgs args)
         {
             Close();
         }

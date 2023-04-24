@@ -1,7 +1,9 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:system="clr-namespace:System;assembly=System.Runtime"
-                    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml">
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:system="clr-namespace:System;assembly=System.Runtime"
+    >
     <ResourceDictionary.MergedDictionaries>
         <ui:ControlsDictionary />
     </ResourceDictionary.MergedDictionaries>
@@ -15,5 +17,8 @@
     <Thickness x:Key="ComboBoxItemContentMargin">5,4,4,4</Thickness>
 
     <!-- Light/Dark.xaml -->
-    <Color x:Key="ControlFillColorSecondary">#603f3f3f</Color>
+    <SolidColorBrush
+        x:Key="ControlFillColorDisabledBrush"
+        Color="#603f3f3f"
+        />
 </ResourceDictionary>
