@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 
 using IntegratedHardwareMonitor.Bar.Services;
-using IntegratedHardwareMonitor.Common.Services;
+using IntegratedHardwareMonitor.Core.Services;
 
 namespace IntegratedHardwareMonitor.Bar.IoC
 {

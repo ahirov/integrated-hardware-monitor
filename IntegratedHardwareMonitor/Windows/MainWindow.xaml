@@ -1,0 +1,47 @@
+﻿<bar:BarWindow
+    x:Class="IntegratedHardwareMonitor.Windows.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:bar="clr-namespace:IntegratedHardwareMonitor.Bar.Controls;assembly=IntegratedHardwareMonitor.Bar"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    MinWidth="720"
+    MinHeight="30"
+    WindowStyle="None"
+    ResizeMode="NoResize"
+    Background="{ui:ThemeResource ApplicationBackgroundBrush}"
+    Foreground="{ui:ThemeResource TextFillColorPrimaryBrush}"
+    >
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <StackPanel
+            Grid.Column="0"
+            VerticalAlignment="Center"
+            >
+            <TextBlock>Items...</TextBlock>
+        </StackPanel>
+        <StackPanel
+            Grid.Column="1"
+            Orientation="Horizontal"
+            >
+            <ui:Button
+                Icon="Settings20"
+                Margin="2, 0"
+                Padding="8, 4"
+                FontSize="16"
+                Appearance="Primary"
+                Click="OnClickSettingBtn"
+                />
+            <ui:Button
+                Icon="DismissSquare20"
+                Margin="2, 0"
+                Padding="8, 4"
+                FontSize="16"
+                Appearance="Primary"
+                Click="OnClickCloseBtn"
+                />
+        </StackPanel>
+    </Grid>
+</bar:BarWindow>

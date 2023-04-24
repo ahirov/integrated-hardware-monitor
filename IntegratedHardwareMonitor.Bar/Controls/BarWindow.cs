@@ -6,7 +6,7 @@ using IntegratedHardwareMonitor.Bar.Entities;
 using IntegratedHardwareMonitor.Bar.IoC;
 using IntegratedHardwareMonitor.Bar.NativeCode;
 using IntegratedHardwareMonitor.Bar.Services;
-using IntegratedHardwareMonitor.Common.Entities;
+using IntegratedHardwareMonitor.Core.Entities;
 
 namespace IntegratedHardwareMonitor.Bar.Controls
 {
